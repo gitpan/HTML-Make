@@ -59,11 +59,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = HTML::Make
 NAME_SYM = HTML_Make
-VERSION = 0.01
+VERSION = 0.02
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_01
+VERSION_SYM = 0_02
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.01
+XS_VERSION = 0.02
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -186,10 +186,13 @@ PERL_ARCHIVE_AFTER =
 
 
 TO_INST_PM = build.pl \
+	get-tags.pl \
 	lib/HTML/Make.pm
 
 PM_TO_BLIB = build.pl \
 	$(INST_LIB)/HTML/build.pl \
+	get-tags.pl \
+	$(INST_LIB)/HTML/get-tags.pl \
 	lib/HTML/Make.pm \
 	blib/lib/HTML/Make.pm
 
@@ -261,7 +264,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = HTML-Make
-DISTVNAME = HTML-Make-0.01
+DISTVNAME = HTML-Make-0.02
 
 
 # --- MakeMaker macro section:
@@ -505,7 +508,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'resources:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  bugtracker: https://github.com/benkasminbullock/HTML-Make/issues' >> META_new.yml
 	$(NOECHO) $(ECHO) '  repository: https://github.com/benkasminbullock/HTML-Make' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version: 0.01' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version: 0.02' >> META_new.yml
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
@@ -553,7 +556,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '         "url" : "https://github.com/benkasminbullock/HTML-Make"' >> META_new.json
 	$(NOECHO) $(ECHO) '      }' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
-	$(NOECHO) $(ECHO) '   "version" : "0.01"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "version" : "0.02"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
@@ -869,6 +872,7 @@ ppd :
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
 	  build.pl $(INST_LIB)/HTML/build.pl \
+	  get-tags.pl $(INST_LIB)/HTML/get-tags.pl \
 	  lib/HTML/Make.pm blib/lib/HTML/Make.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
