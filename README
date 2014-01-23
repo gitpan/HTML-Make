@@ -6,7 +6,7 @@
                                                           
 
 
-This is the README for HTML::Make version 0.02.
+This is the README for HTML::Make version 0.03.
 
 HTML::Make is a "module" for the Perl computer programming language, a library
 of computer code to install on a computer.  This document contains four
@@ -26,7 +26,29 @@ sections:
 
 HTML::Make - make HTML
 
+This is an HTML generator. You first of all make a top node using
+"new",
 
+    my $top_node = HTML::Make->new ('ul');
+
+then add children to the top node using "push":
+
+    my $element = $top_node->push ('li');
+
+You add text to elements using "add_text":
+
+    $element->add_text ('Ça plane pour moi');
+
+You can add attributes to elements using "add_attr":
+
+    $element->add_attr (class => 'plastic bertrand');
+
+When you want to get the HTML as text, you use "text" on your top node:
+
+    my $html = $top_node->text ();
+
+Other convenience features also exist. See the complete documentation
+for full details.
 
 -----------------------------------------------------------------------------
 
@@ -48,6 +70,8 @@ using
 
 3. INSTALLATION
 
+This module requires Perl version 5.6.1 or later.
+
 To install the module from CPAN, use
 
     cpan HTML::Make
@@ -56,11 +80,11 @@ If you have the App::cpanminus installer, you may prefer
 
     cpanm HTML::Make
 
-To install the module from the source file, HTML-Make-0.02.tar.gz, follow this
+To install the module from the source file, HTML-Make-0.03.tar.gz, follow this
 sequence of commands:
 
-    tar xfz HTML-Make-0.02.tar.gz
-    cd HTML-Make-0.02
+    tar xfz HTML-Make-0.03.tar.gz
+    cd HTML-Make-0.03
     perl Makefile.PL
     make
     make install
@@ -85,6 +109,6 @@ repository on github at
 
 -----------------------------------------------------------------------------
 
-This README was written on Mon Nov 25 10:06:42 2013.
+This README was written on Thu Jan 23 17:26:02 2014.
 
 -----------------------------------------------------------------------------

@@ -1,6 +1,5 @@
 Changes
 lib/HTML/Make.pm
-Makefile
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
